@@ -1,0 +1,62 @@
+/*
+dark blue:#36506b;
+Cyan:#3ec1c9;
+ALb:#F5F5F5;
+roz:#fc5183;
+
+Dark Blue - background lego box, butoane,
+#F5F5F5 - text
+cyan- hover butoane
+roz - border butoane
+*/
+.titlu_sectiune{
+    position: relative;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.titlu_sectiune span{
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #F5F5F5;
+    background-color: #36506b;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+}
+
+.wrapper_form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+    background-color:#36506b ;
+}
+.wrapper_form form{
+    width: 100%;
+    height: 80%;
+    color: #F5F5F5;
+}
+#descriere_text_box{
+    width: 70%;
+    margin-left: 15%;
+    position: inherit;
+    height: 40%;
+    margin-top: 5px;
+}
+
+@media screen and (max-width:500px) {
+    #cantitate{
+        display: flex;
+        flex-direction: column;
+    }
+    #cantitate input{
+        left: 15%;
+        width: 5em;
+    }
+}
