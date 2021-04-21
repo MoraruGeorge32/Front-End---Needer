@@ -1,0 +1,77 @@
+/* Example Styles for React Tags*/
+#app {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+div.ReactTags__tags {
+    position: relative;
+}
+/* Styles for the input */
+div.ReactTags__tagInput {
+    width: auto;
+    border-radius: 2vw;
+    border-style: solid;
+    display: inline-block;
+}
+
+
+div.ReactTags__tagInput input.ReactTags__tagInputField,
+div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
+    height: 3.1vh;
+    border-radius: 2vw;
+    border-style: solid;
+    font-size: 1.2vw;
+    width: auto;
+    text-align: center;
+}
+
+/* Styles for selected tags */
+
+div.ReactTags__selected span.ReactTags__tag {
+    border: 0.1vw solid #ddd;
+    background: #3fc1c9;
+    font-size: 2vw;
+    display: inline-block;
+    margin: 0 0.5vw;
+    cursor: move;
+    border-radius: 0.2vw;
+}
+div.ReactTags__selected button.ReactTags__remove {
+    color: #aaa;
+    font-size: 2vw;
+    margin: 1vw 1vw 1vw 1vw;
+    cursor: pointer;
+}
+
+div.ReactTags__selected button.ReactTags__remove:hover{
+    background-color: rgba(255, 0, 0, 100);
+    transition-duration: 0.45s;
+}
+
+
+/* Styles for suggestions */
+div.ReactTags__suggestions {
+    position: absolute;
+}
+div.ReactTags__suggestions ul {
+    list-style-type: none;
+    box-shadow: 1vw 1vw 1vw 1vw rgba(0,0,0,.2);
+    background: #fc5185;
+    width: 20vw;
+}
+div.ReactTags__suggestions li {
+    border-bottom: 0.1vw solid #ddd;
+    padding: 0.5vw 1vw;
+    margin: 0;
+    font-size: 2vw;
+}
+div.ReactTags__suggestions li mark {
+    background: none;
+    font-size: 2vw;
+}
+div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
+    background: #b7cfe0;
+    cursor: pointer;
+}
