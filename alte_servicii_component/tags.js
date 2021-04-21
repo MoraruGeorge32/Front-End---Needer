@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import {COUNTRIES} from './countries';
 import './style-tags.css';
 import { WithContext as ReactTags } from 'react-tag-input';
-
 const suggestions = COUNTRIES.map((country) => {
   return {
     id: country,
@@ -24,7 +23,8 @@ export default class Tags extends React.Component {
     super(props);
 
     this.state = {
-      tags: [{ id: 'Thailand', text: 'Thailand' }, { id: 'India', text: 'India' }],
+      //default exemple de tag-uri
+      tags: [{ id: 'Thailand', text: 'THAILANDA' }, { id: 'India', text: 'INDIA' }],
       suggestions: suggestions,
     };
     this.handleDelete = this.handleDelete.bind(this);
