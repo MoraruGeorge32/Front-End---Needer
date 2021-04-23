@@ -1,3 +1,41 @@
+.alignRight{
+    text-align: right;
+}
+
+.butonSubmit{
+    background-color:rgba(252,81,133, 1);
+    color: white;
+    font-size: 2vw;
+    text-align: right;
+    margin: 4vw 1vw 2vw;
+    border-style: solid;
+    border-color:white;
+    border-width: 0.5vw;
+    border-radius: 1vw;
+}
+
+.DescriereData{
+    background-color: rgba(252,81,133, 1);
+    font-size: 2vw;
+    margin-top: 2vw;
+    border-bottom: solid;
+    border-top: solid;
+    border-width: 0.5vw;
+}
+
+.DescriereNevoie {
+    background-color: rgba(252,81,133, 1);
+    font-size: 2vw;
+    margin-top: 2vw;
+    border-bottom: solid;
+    border-top: solid;
+    border-width: 0.5vh;
+}
+
+.DataFinalizare {
+    font-size: 1.5vw;
+}
+
 .titlu_sectiune{
     text-align: center;
     position: relative;
@@ -27,21 +65,22 @@
     display: flex;
     flex-direction: column;
     width: 80%;
-    height: 100%;
     background-color:#36506b;
 }
 .wrapper_form form{
     text-align: center;
     width: 100%;
-    height: 80%;
+    height: 100%;
     color: #F5F5F5;
+    background-color: #36506b;
 }
 
 #descriere_text_box{
+    margin-bottom: 1vh;
     text-align: center;
     width: 70%;
-    height: 40%;
-    margin-top: 0.5vw;
+    height: 20vh;
+    margin-top: 0.5vh;
 }
 
 @media screen and (max-width:500px) {
