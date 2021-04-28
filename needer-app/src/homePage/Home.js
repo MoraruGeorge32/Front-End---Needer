@@ -1,4 +1,5 @@
 import './Home.css';
+import {Link} from 'react-router-dom';
 function Home() {
   return (
     <div className="Home">
@@ -8,7 +9,7 @@ function Home() {
                              în cadrul comunității. Această problemă poate fi rezolvată facil prin crearea unei platforme; aceasta va fi formată dintr-o pagină web și o
                             aplicație mobile în cadrul căreia utilizatorului i se va pune la dispoziție un formular prin care va putea cere sau oferi ajutor.
 </p>
-        <button type="button" className="form-button">Găsește ajutor!</button> 
+        <Link className="form-button" to="/form">Găsește ajutor!</Link> 
       </header>
     </div>
   );
