@@ -2,25 +2,26 @@
 import React from 'react';
 import {slide as Menu} from 'react-burger-menu';
 import './Sidebar.css';
+import {Link} from 'react-router-dom';
 
 export default props => {
     return (
         <Menu right >
-            <a className="menu-item" href="/">
+            <Link className="menu-item" to="/">
                 Home
-            </a>
-            <a className="menu-item" href="/">
+            </Link>
+            <Link className="menu-item" to="/">
                 Statistics
-            </a>
-            <a className="menu-item" href="/">
+            </Link>
+            <Link className="menu-item" to="/help">
                 Help
-            </a>
-            <a className="menu-item" href="/">
+            </Link>
+            <Link className="menu-item" to="/form">
                 Complete Form
-            </a>
-            <a className="menu-item" href="/">
+            </Link>
+            <Link className="menu-item" to="/">
                 My Profile
-            </a>
+            </Link>
         </Menu>
     );
 };

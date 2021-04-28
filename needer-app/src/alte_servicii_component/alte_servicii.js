@@ -16,7 +16,7 @@ function showServiciu(nevoie) {
     nevoie="serviciului";
 }
 function currentDate(){
-    return (new Date).getDate()+'-'+((new Date).getMonth()+1)+'-'+(new Date).getFullYear();
+    return (new Date()).getDate()+'-'+((new Date()).getMonth()+1)+'-'+(new Date()).getFullYear();
 }
 function datePicker(){
 
