@@ -2,6 +2,7 @@ import React from 'react';
 import './style.css';
 import Tags from "./tags";
 import MyDatePicker from './datePicker.js';
+import {Link} from 'react-router-dom';
 
 function AlteServicii() {
     return (
@@ -17,7 +18,11 @@ function AlteServicii() {
                         <div class="DescriereData"><span class="DataFinalizare">Data doririi finalizării cererii</span></div><br />
                         <MyDatePicker />
                         {/*<input type="date" id="data_pentru_cerere" value={date_value_current} name="data_dorita"></input>*/}
-                        <div class="alignRight"><input class="butonSubmit" type="submit"></input></div>
+                        <Link to='/loading'>
+                            <div class="alignRight">
+                                <input class="butonSubmit" type="submit">
+                                    </input></div>
+                        </Link>
                     </form>
                 </div>
             </div>
