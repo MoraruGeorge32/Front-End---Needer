@@ -19,8 +19,8 @@
       height: 3.1vh;
       border-radius: 2vw;
       border-style: solid;
-      font-size: 1.2vw;
-      width: auto;
+      font-size: 2vh;
+      width: 80%;
       padding-left: 2vw;
       padding-right: 2vw;
       padding-top: 0.5vw;
@@ -81,7 +81,7 @@
   
   div.ReactTags__suggestions li mark {
       background: none;
-      font-size: 4vw;
+      font-size: 2vw;
   }
   div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
       background: #b7cfe0;
@@ -109,4 +109,17 @@
       div.ReactTags__selected button.ReactTags__remove{
           font-size: 5vw;
       }
+  }
+  @media screen and (max-width:1200px){
+    div.ReactTags__selected span.ReactTags__tag {
+        border: 0.2vh solid #ddd;
+        font-size: 2.5vh;
+        margin: 0.75vh 0.5vh 0.75vh 0.5vh;
+        border-radius: 3.5vh;
+        padding-left: 0.75vh;
+        padding-left: 0.75vh;
+    } div.ReactTags__suggestions li mark {
+        background: none;
+        font-size: 2.5vw;
+    }
   }
