@@ -1,11 +1,4 @@
 import './App.css';
-<<<<<<< HEAD
-import Hamburger from './Hamburger';
-
-function App() {
-  return (
-    <Hamburger/>
-=======
 import Footer from "./footer-folder/footer";
 import Navbar from "./Navbar/Navbar";
 import Home from "./homePage/Home";
@@ -42,7 +35,6 @@ function App() {
       </Router>
       
     </div>
->>>>>>> abf66afc5a2142ada8ba6c742765e7bd6f8212d7
   );
 }
 

@@ -8,10 +8,6 @@
     "@testing-library/user-event": "^12.8.3",
     "react": "^17.0.2",
     "react-burger-menu": "^3.0.6",
-<<<<<<< HEAD
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-=======
     "react-dnd": "^5.0.0",
     "react-dnd-html5-backend": "^3.0.2",
     "react-dom": "^17.0.2",
@@ -19,7 +15,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-tag-input": "^6.5.2",
->>>>>>> abf66afc5a2142ada8ba6c742765e7bd6f8212d7
     "web-vitals": "^1.1.1"
   },
   "scripts": {
