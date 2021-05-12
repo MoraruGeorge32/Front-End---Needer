@@ -9,8 +9,9 @@ function App() {
 import Footer from "./footer-folder/footer";
 import Navbar from "./Navbar/Navbar";
 import Home from "./homePage/Home";
-import Help from "./Help/Help"
+import Help from "./Help/Help";
 import Forum from "./App-forum/App-forum";
+import FAQPage from "./faqPage/faqPage";
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import LoadingScreen from "./Waiting_screen/loadingScreen";
 
@@ -30,12 +31,16 @@ function App() {
           <Route path="/loading">
             <LoadingScreen />
           </Route>
+          <Route path="/faqpage">
+            <FAQPage />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
         </Switch>
+        <Footer/>
       </Router>
-      <Footer/>
+      
     </div>
 >>>>>>> abf66afc5a2142ada8ba6c742765e7bd6f8212d7
   );

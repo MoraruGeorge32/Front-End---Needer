@@ -3,7 +3,8 @@ import "./footer-style.css";
 import fb from "./icons/facebook.svg";
 import yt from "./icons/youtube.svg";
 import tw from "./icons/twitter.svg";
-import ist from "./icons/instagram.svg"
+import ist from "./icons/instagram.svg";
+import {Link} from 'react-router-dom';
 
 function Footer() {
 	const ColoredLine = ({ color }) => (
@@ -32,7 +33,7 @@ function Footer() {
 						Despre noi și munca noastră
 						</article>
 					<article>
-						Întrebări frecvente
+					 	<Link to='/faqpage'>Întrebări frecvente</Link>
 					</article>
 				</section>
 				<section class="Contact">
