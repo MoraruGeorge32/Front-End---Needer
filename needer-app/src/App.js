@@ -2,10 +2,10 @@ import './App.css';
 import Footer from "./footer-folder/footer";
 import Navbar from "./Navbar/Navbar";
 import Home from "./homePage/Home";
-import AlteServicii from "./alte_servicii_component/alte_servicii"
 import Help from "./Help/Help"
-
+import Forum from "./App-forum/App-forum";
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
+import LoadingScreen from "./Waiting_screen/loadingScreen";
 
 
 function App() {
@@ -15,10 +15,13 @@ function App() {
         <Navbar/>
         <Switch>
           <Route path="/form">
-            <AlteServicii />
+            <Forum />
           </Route>
           <Route path="/help">
             <Help />
+          </Route>
+          <Route path="/loading">
+            <LoadingScreen />
           </Route>
           <Route path="/">
             <Home />

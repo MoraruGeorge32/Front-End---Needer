@@ -122,7 +122,7 @@ Roz - padding,margins,border butoane, div-uri, hr-uri
 	width: 40px;
 	margin: 0;
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:1000px) and (max-height:1300px) {
 	.container {
 		display: flex;
 		flex-direction: column;
@@ -133,6 +133,15 @@ Roz - padding,margins,border butoane, div-uri, hr-uri
 		width: 100%;
 		margin: 0;
 	}
+	.footer {
+		background-color: #36506b;
+		color: #F5F5F5;
+		font-size: 2vh;
+		font-family: Roboto-Light;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+	  }
 }
 
 @media screen and (max-width:1190px) {
@@ -141,5 +150,14 @@ Roz - padding,margins,border butoane, div-uri, hr-uri
 		flex-direction: column;
 		align-items: center;
 	}
+	.footer {
+		background-color: #36506b;
+		color: #F5F5F5;
+		font-size: 2vh;
+		font-family: Roboto-Light;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+	  }
 	
 }
