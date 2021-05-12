@@ -9,7 +9,7 @@ function AlteServicii() {
             <div class="wrapper" id="test">
                 <div class="wrapper_form">
                     <form>
-                        <div class="DescriereNevoie"><label for="textbox">Descriere nevoie</label> </div> <br />
+                        <div class="DescriereNevoie"><label>Descriere nevoie</label> </div> <br />
                         <Tags />
                         <textarea id="descriere_text_box" name="textbox" />
                         <br />
