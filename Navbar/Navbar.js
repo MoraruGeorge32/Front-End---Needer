@@ -1,17 +1,16 @@
 import React from 'react';
-import "../App.css";
+import "./Navbar.css";
 import logoSirena from './Siren1.gif';
-import menuItem from './Menu.svg';
-
+import Hamburger from '../hamburger/Hamburger';
 function Navbar() {
     return (
         <div className="Navbar">
             <div class="firstSide"> 
-                <img src={logoSirena} alt=""/>
+                  
             </div>
-            <div class="secondSide"> 
-                <img src={menuItem} alt=""/>
-            </div> 
+            <div class="secondSide">
+               <Hamburger/>
+            </div>
             
         </div>
     );
