@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import Tags from "./tags";
 import MyDatePicker from './datePicker.js';
-
+import {Link} from 'react-router-dom';
 
 function showProdus(nevoie) {
     document.getElementById('durata').style.display = "none";
@@ -70,7 +70,7 @@ function AlteServicii() {
                 <span>Data doririi finalizării cererii</span><br/>
                 <MyDatePicker/>
                 {/*<input type="date" id="data_pentru_cerere" value={date_value_current} name="data_dorita"></input>*/}
-                <input type="submit"></input>
+                <Link type="submit" to "/loadingscreen">Trimite</Link>
                 </form>
             </div>
         </div>
