@@ -47,10 +47,12 @@ Roz - padding,margins,border butoane, div-uri, hr-uri
 	width: 100%;
 }
 .title1,.title2,.title3{
+	margin-top: 0.5em;
 	margin-bottom: 2em;
 }
 
 .Info {
+	top:10px;
 	width: 33%;
 }
 
@@ -59,10 +61,12 @@ Roz - padding,margins,border butoane, div-uri, hr-uri
 }
 
 .Follow {
+	top:10px;
 	width: 33%;
 }
 
 .Contact {
+	top:10px;
 	margin-left: 30px;
 	margin-right: 30px;
 }

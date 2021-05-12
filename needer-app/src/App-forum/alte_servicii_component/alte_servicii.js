@@ -27,7 +27,7 @@ function AlteServicii() {
                     <label for="tip_nevoie">Alegeți tipul de nevoie</label><br />
                     <input type="radio" id="selectServiciu" onClick={hideCantitate} name="tip_nevoie" value="Serviciu" /> Serviciu <br />
                     <input type="radio" id="selectProdus" onClick={showCantitate} name="tip_nevoie" value="Produs" /> Produs
-                        <br />
+                    <br />
                     <Tags />
                     <textarea id="descriere_text_box" name="textbox" />
                     <br />
