@@ -1,4 +1,5 @@
 .App {
+<<<<<<< HEAD
   text-align: center;
 }
 
@@ -35,4 +36,9 @@
   to {
     transform: rotate(360deg);
   }
+=======
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+>>>>>>> abf66afc5a2142ada8ba6c742765e7bd6f8212d7
 }

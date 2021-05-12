@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html,body{
   margin: 0;
   padding: 0;
@@ -12,3 +13,18 @@ html,body{
   padding-bottom: 10px;
   padding-top: 10px;
 }
+=======
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+>>>>>>> abf66afc5a2142ada8ba6c742765e7bd6f8212d7
