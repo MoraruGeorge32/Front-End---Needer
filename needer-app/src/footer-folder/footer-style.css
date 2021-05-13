@@ -56,8 +56,14 @@ Roz - padding,margins,border butoane, div-uri, hr-uri
 	width: 33%;
 }
 
-.Info article:hover {
+.Info article a:hover {
 	text-decoration: underline;
+	color: white;
+}
+
+.Info article a:visited{
+	text-decoration: underline;
+	color: white;
 }
 
 .Follow {
