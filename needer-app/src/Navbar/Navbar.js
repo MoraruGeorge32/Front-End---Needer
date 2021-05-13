@@ -1,6 +1,5 @@
 import React from 'react';
 import "./Navbar.css";
-import logoSirena from './Siren1.gif';
 import Hamburger from '../hamburger/Hamburger';
 function Navbar() {
     return (

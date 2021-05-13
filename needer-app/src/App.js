@@ -7,6 +7,7 @@ import Forum from "./App-forum/App-forum";
 import FAQPage from "./faqPage/faqPage";
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import LoadingScreen from "./Waiting_screen/loadingScreen";
+import AboutUs from "./aboutUs/aboutUs";
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route path="/faqpage">
             <FAQPage />
+          </Route>
+          <Route path="/aboutUs">
+            <AboutUs />
           </Route>
           <Route path="/">
             <Home />

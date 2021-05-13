@@ -2,7 +2,7 @@ import "./faqPage.css"
 
 function faqPage() {
   return (
-    <div class="wrapper">
+    <div class="wrapper1">
         <h1>Întrebări frecvente</h1>
         <div class="QA">
             <h2 class="question">1. Cu ce mă ajută această aplicație?</h2>
