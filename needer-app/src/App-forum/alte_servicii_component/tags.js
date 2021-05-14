@@ -24,7 +24,7 @@ export default class Tags extends React.Component {
 
     this.state = {
       //default exemple de tag-uri
-      tags: [{ id: 'Thailand', text: 'serviciu' }, { id: 'India', text: 'produs' }],
+      tags: [],
       suggestions: suggestions,
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -38,10 +38,12 @@ export default class Tags extends React.Component {
     this.setState({
       tags: tags.filter((tag, index) => index !== i),
     });
+    this.props.parentCallback(tags.filter((tag, index) => index !== i));
   }
 
   handleAddition(tag) {
    this.setState(state => ({ tags: [...state.tags, tag] }));
+   this.props.parentCallback([...this.state.tags, tag]);
   }
 
   handleDrag(tag, currPos, newPos) {
@@ -53,6 +55,7 @@ export default class Tags extends React.Component {
 
     // re-render
     this.setState({ tags: newTags });
+    this.props.parentCallback(newTags);
   }
 
   handleTagClick(index) {

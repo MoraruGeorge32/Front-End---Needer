@@ -9,6 +9,7 @@ import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import LoadingScreen from "./Waiting_screen/loadingScreen";
 import AboutUs from "./aboutUs/aboutUs";
 
+localStorage.setItem('user',"Musteata Robert");
 
 function App() {
   return (

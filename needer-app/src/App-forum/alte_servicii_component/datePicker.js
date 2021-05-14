@@ -134,6 +134,7 @@ export default class MyDatePicker extends Component {
         this.setState({ selectedDay })
         if(this.props.onChange) {
             this.props.onChange(selectedDay);
+            this.props.callBackDate(this.state);
         }
     }
 
@@ -146,7 +147,8 @@ export default class MyDatePicker extends Component {
                 year: dateData.year, 
                 month: dateData.month-1, 
                 monthDetails: this.getMonthDetails(dateData.year, dateData.month-1)
-            })
+            });
+            this.props.callBackDate(this.state);
         }
     }
 

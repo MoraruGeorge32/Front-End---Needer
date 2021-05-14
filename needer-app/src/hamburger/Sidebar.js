@@ -4,7 +4,10 @@ import {slide as Menu} from 'react-burger-menu';
 import './Sidebar.css';
 import {Link} from 'react-router-dom';
 
+
+
 export default props => {
+    let userName = localStorage.getItem('user');
     return (
         <Menu right >
             <Link className="menu-item" to="/">
@@ -22,6 +25,7 @@ export default props => {
             <Link className="menu-item" to="/">
                 My Profile
             </Link>
-        </Menu>
+            <p> Hello, {userName}</p>   
+        </Menu>        
     );
 };
