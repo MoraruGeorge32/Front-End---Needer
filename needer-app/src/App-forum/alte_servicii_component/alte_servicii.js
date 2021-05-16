@@ -1,32 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './style.css';
 import Tags from "./tags";
-import MyDatePicker from './datePicker.js';
 import { Link } from 'react-router-dom';
-import { useFormik, validateYupSchema } from 'formik';
+import { useFormik } from 'formik';
+import CantitateInput from "./cantitateInput";
 
-function hideCantitate() {
-    document.getElementById("cantitateprodus").style.display = "none";
-}
+// function hideCantitate() {
+//     document.getElementById("cantitateprodus").style.display = "none";
+// }
 
-function showCantitate() {
-    document.getElementById("cantitateprodus").style.display = "inline-block";
-}
+// function showCantitate() {
+//     document.getElementById("cantitateprodus").style.display = "inline-block";
+// }
+
 
 
 function AlteServicii() {
+
     const [tags, setTags] = useState([]);
+    const [cantitate,setCantitate] = useState(tags);
+    
+    useEffect(()=>{
+        console.log(tags);
+    });
     const formik = useFormik({
         initialValues: {
             tip_nevoie: 'Produs',
             tags: [],
             textbox: '',
-            quantity: 0,
-            bifatIzolare: false,
         },
         onSubmit: values => {
-            values.tags = tags;
-            alert(JSON.stringify(values, null, null)); 
+            console.log(cantitate);
+            values.tags = cantitate.map((tag) => [tag.id, tag.cantitate]);
+            alert(JSON.stringify(values, null, null));
             fetch(`https://hooks.zapier.com/hooks/catch/10117216/byp97u8`, {
                 method: 'POST',
                 body: JSON.stringify(values, null, null),
@@ -34,35 +40,30 @@ function AlteServicii() {
             console.log(values);
         }
     });
-    return (<div class="wrapper" id="test">
-        <div class="wrapper_form">
+    return (<div className="wrapper" id="test">
+        <div className="wrapper_form">
             <form onSubmit={formik.handleSubmit}>
-                <div class="DescriereNevoie"><label>Descriere nevoie</label> </div> <br />
+                <div className="DescriereNevoie"><label>Descriere nevoie</label> </div> <br />
 
                 <label htmlFor="tip_nevoie">Alegeți tipul de nevoie</label><br />
-                <input onChange={formik.handleChange} type="radio" id="selectServiciu" onClick={hideCantitate} name="tip_nevoie" value="Serviciu" required /> Serviciu <br />
-                <input defaultChecked onChange={formik.handleChange} type="radio" id="selectProdus" onClick={showCantitate} name="tip_nevoie" value="Produs" required /> Produs
-                <br />
-                <input name="bifatIzolare" onChange={formik.handleChange} type="checkbox" id="bifatIzolare" />
-                <label htmlFor="izolare">Doresc sa precizez faptul ca sunt in izolare(Bifati daca da sunteti in izolare)</label><br />
+                <input onChange={formik.handleChange} type="radio" id="selectServiciu" name="tip_nevoie" value="Serviciu" required /> Serviciu <br />
+                <input defaultChecked onChange={formik.handleChange} type="radio" id="selectProdus" name="tip_nevoie" value="Produs" required /> Produs
                 <br />
                 <Tags giveTags={setTags} />
                 <textarea id="descriere_text_box" name="textbox" onChange={formik.handleChange} />
                 <br />
                 {/*<label for="data_dorita">Data doriri finalizarii cererii {nevoie}</label>*/}
-                <div class="DescriereData"><span class="DataFinalizare">Data doririi finalizării cererii</span></div>
+                <div className="DescriereData"><span className="DataFinalizare">Data doririi finalizării cererii</span></div>
                 <br />
                 {/*<MyDatePicker giveData={this.callBackDate />*/}
-                <div class="Cantitate_produs" id="cantitateprodus">
-                    <div class="Cantitate_produs_1">
-                        <label for="quantity">Cantitate (intre 1 si 100 de kilograme):</label>
-                    </div>
-                    <input onChange={formik.handleChange} required type="number" id="quantity" name="quantity" min="1" max="100" />
-                    <br />
-                </div>
-                <div class="alignRight">
+                    {
+                        tags.map((tag, index) => 
+                        <CantitateInput giveQuantity={setCantitate} tag={tag} nameTag={tag.id} />
+                        )
+                    }
+                <div className="alignRight">
                     <Link to='/loading'>
-                        <input class="butonSubmit" onClick={formik.handleSubmit} type="submit"></input>
+                        <input className="butonSubmit" onClick={formik.handleSubmit} type="submit"></input>
                     </Link>
                 </div>
 
@@ -77,7 +78,7 @@ export default AlteServicii;
 
 
 /*
-class ClasaAlteServicii extends React.Component {
+className ClasaAlteServicii extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -159,11 +160,11 @@ class ClasaAlteServicii extends React.Component {
     }
     render() {
         return (
-            <div class="wrapper" id="test">
-                <div class="wrapper_form">
+            <div className="wrapper" id="test">
+                <div className="wrapper_form">
                     <form onSubmit={this.handleSubmit}>
                         
-                        <div class="DescriereNevoie"><label>Descriere nevoie</label> </div> <br />
+                        <div className="DescriereNevoie"><label>Descriere nevoie</label> </div> <br />
 
                         <label htmlFor="tip_nevoie">Alegeți tipul de nevoie</label><br />
                         <input type="radio" id="selectServiciu" onClick={this.hideCantitate} name="tip_nevoie" value="Serviciu" required /> Serviciu <br />
@@ -173,19 +174,19 @@ class ClasaAlteServicii extends React.Component {
                         <textarea id="descriere_text_box" name="textbox" onChange={this.handleChangeTextArea} />
                         <br />
                         
-                        <div class="DescriereData"><span class="DataFinalizare">Data doririi finalizării cererii</span></div>
+                        <div className="DescriereData"><span className="DataFinalizare">Data doririi finalizării cererii</span></div>
                         <br />
                         
-                        <div class="Cantitate_produs" id="cantitateprodus">
-                            <div class="Cantitate_produs_1">
+                        <div className="Cantitate_produs" id="cantitateprodus">
+                            <div className="Cantitate_produs_1">
                                 <label for="quantity">Cantitate (intre 1 si 100 de kilograme):</label>
                             </div>
                             <input type="number" id="quantity" name="quantity" min="1" max="100" />
                             <br />
                         </div>
-                        <div class="alignRight">
+                        <div className="alignRight">
                             <Link to='/loading'>
-                                <input class="butonSubmit" type="submit"></input>
+                                <input className="butonSubmit" type="submit"></input>
                             </Link>
                         </div>
 
@@ -199,26 +200,26 @@ class ClasaAlteServicii extends React.Component {
 //de avut in calcul functie asyncrona cand vrem raspuns de la catalin
 function User(props) {
     const [user, setUser] = useState(null);
-  
+
     async function fetchUserData(id) {
-      const response = await fetch("/" + id);
-      setUser(await response.json());
+        const response = await fetch("/" + id);
+        setUser(await response.json());
     }
-  /*
-    useEffect(() => {
-      fetchUserData(props.id);
-    }, [props.id]);*/
-  
+    /*
+      useEffect(() => {
+        fetchUserData(props.id);
+      }, [props.id]);*/
+
     if (!user) {
-      return "loading...";
+        return "loading...";
     }
-  
+
     return (
-      <details>
-        <summary>{user.name}</summary>
-        <strong>{user.age}</strong> years old
-        <br />
+        <details>
+            <summary>{user.name}</summary>
+            <strong>{user.age}</strong> years old
+            <br />
         lives in {user.address}
-      </details>
+        </details>
     );
-  }
+}
