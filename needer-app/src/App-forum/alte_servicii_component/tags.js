@@ -24,7 +24,6 @@ export default class Tags extends React.Component {
 
     this.state = {
       //default exemple de tag-uri
-      tags: [],
       suggestions: suggestions,
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -34,32 +33,28 @@ export default class Tags extends React.Component {
 
   }
 
-  componentDidUpdate() {
-    this.props.giveTags(this.state.tags);
-  }
 
   handleDelete(i) {
-    const { tags } = this.state;
-    this.setState({
-      tags: tags.filter((tag, index) => index !== i),
-    });//, this.props.parentCallback);
+    const { tags } = this.props;
+    this.props.giveTags(tags.filter((tag,index)=> index !== i));//, this.props.parentCallback);
     //this.props.parentCallback(tags.filter((tag, index) => index !== i));
   }
 
   handleAddition(tag) {
-    this.setState(state => ({ tags: [...state.tags, tag] }));//, this.props.parentCallback);
+    this.props.giveTags([...this.props.tags,tag]);
+  //, this.props.parentCallback);
     //this.props.parentCallback([...this.state.tags, tag] );
   }
 
   handleDrag(tag, currPos, newPos) {
-    const tags = [...this.state.tags];
+    const tags = [...this.props.tags];
     const newTags = tags.slice();
 
     newTags.splice(currPos, 1);
     newTags.splice(newPos, 0, tag);
 
     // re-render
-    this.setState({ tags: newTags });//, this.props.parentCallback);
+    this.props.giveTags(newTags);//, this.props.parentCallback);
     //this.props.parentCallback(newTags);
   }
 
@@ -68,11 +63,11 @@ export default class Tags extends React.Component {
   }
 
   render() {
-    const { tags, suggestions } = this.state;
+    const { suggestions } = this.state;
     return (
       <div>
         <ReactTags
-          tags={tags}
+          tags={this.props.tags}
           suggestions={suggestions}
           delimiters={delimiters}
           handleDelete={this.handleDelete}

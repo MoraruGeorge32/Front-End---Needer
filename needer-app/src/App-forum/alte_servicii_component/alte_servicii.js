@@ -1,4 +1,5 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { unmountComponentAtNode, findDOMNode, render } from 'react-dom';
 import './style.css';
 import Tags from "./tags";
 import { Link } from 'react-router-dom';
@@ -18,49 +19,80 @@ import CantitateInput from "./cantitateInput";
 function AlteServicii() {
 
     const [tags, setTags] = useState([]);
-    const [cantitate,setCantitate] = useState(tags);
-    
-    useEffect(()=>{
-        console.log(tags);
-    });
+    var [cantitate, setCantitate] = useState([]);
+    let count = 0;
     const formik = useFormik({
         initialValues: {
-            tip_nevoie: 'Produs',
+            tip_nevoie: '',
             tags: [],
             textbox: '',
         },
         onSubmit: values => {
-            console.log(cantitate);
-            values.tags = cantitate.map((tag) => [tag.id, tag.cantitate]);
-            alert(JSON.stringify(values, null, null));
+
+            let tagValues = tags;
+            tagValues.map((tag, index) => {
+                tag.name = tag.text;
+                delete tag["id"];
+                delete tag["text"];
+                return tag;
+            })
+            alert(JSON.stringify(tagValues));
+            if (formik.values.tip_nevoie === "Produs")
+                tagValues.map((tag, index) => tag["quantity"] = cantitate[index])
+            else
+                tagValues.map((tag) => tag["quantity"] = -1)
+            values.tags = tagValues;
+            alert(JSON.stringify(values));
             fetch(`https://hooks.zapier.com/hooks/catch/10117216/byp97u8`, {
                 method: 'POST',
-                body: JSON.stringify(values, null, null),
+                body: JSON.stringify(values),
             });
-            console.log(values);
-        }
+            console.log(JSON.stringify(values));
+        },
     });
+
+    const formikNevoie = () => {
+        let selectedRadio = "";
+        if (document.getElementById("selectServiciu").checked)
+        { 
+             selectedRadio = "Serviciu";
+        }
+        else 
+        {
+            selectedRadio = "Produs";
+        }
+        if (formik.values.tip_nevoie !== selectedRadio)
+            setTags([]);
+        formik.values.tip_nevoie = selectedRadio;
+    }
+
+    const seteazaTag = (tag) => {
+        setTags(tag)
+    }   
+
     return (<div className="wrapper" id="test">
         <div className="wrapper_form">
             <form onSubmit={formik.handleSubmit}>
                 <div className="DescriereNevoie"><label>Descriere nevoie</label> </div> <br />
 
                 <label htmlFor="tip_nevoie">Alegeți tipul de nevoie</label><br />
-                <input onChange={formik.handleChange} type="radio" id="selectServiciu" name="tip_nevoie" value="Serviciu" required /> Serviciu <br />
-                <input defaultChecked onChange={formik.handleChange} type="radio" id="selectProdus" name="tip_nevoie" value="Produs" required /> Produs
+                <input defaultChecked onChange={formikNevoie} type="radio" id="selectServiciu" name="tip_nevoie" value="Serviciu" required /> Serviciu <br />
+                <input onChange={formikNevoie} type="radio" id="selectProdus" name="tip_nevoie" value="Produs" required /> Produs
                 <br />
-                <Tags giveTags={setTags} />
+                <div id="listaTags">
+                    <Tags giveTags={seteazaTag} tags={tags} check={formik.values.tip_nevoie} />
+                </div>
                 <textarea id="descriere_text_box" name="textbox" onChange={formik.handleChange} />
                 <br />
-                {/*<label for="data_dorita">Data doriri finalizarii cererii {nevoie}</label>*/}
                 <div className="DescriereData"><span className="DataFinalizare">Data doririi finalizării cererii</span></div>
                 <br />
-                {/*<MyDatePicker giveData={this.callBackDate />*/}
-                    {
-                        tags.map((tag, index) => 
-                        <CantitateInput giveQuantity={setCantitate} tag={tag} nameTag={tag.id} />
-                        )
-                    }
+                {
+                    (formik.values.tip_nevoie === "Produs") ?
+                        tags.map((tag) =>
+                            <CantitateInput quantity={cantitate} giveQuantity={setCantitate} tag={tag} keys={++count} />) : undefined
+
+                }
+
                 <div className="alignRight">
                     <Link to='/loading'>
                         <input className="butonSubmit" onClick={formik.handleSubmit} type="submit"></input>

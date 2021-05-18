@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 
 
 export default props => {
-    let userName = localStorage.getItem('user');
+    const username = localStorage.getItem('user');
     return (
         <Menu right >
             <Link className="menu-item" to="/">
@@ -25,7 +25,7 @@ export default props => {
             <Link className="menu-item" to="/">
                 My Profile
             </Link>
-            <p> Hello, {userName}</p>   
+            <p> Hello, {username}</p>   
         </Menu>        
     );
 };

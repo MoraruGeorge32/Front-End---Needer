@@ -7,7 +7,7 @@ function Navbar() {
             <div class="firstSide"> 
                   
             </div>
-            <div class="secondSide">
+            <div className="secondSide">
                <Hamburger/>
             </div>
             
