@@ -33,7 +33,6 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
         <Navbar/>
         <Switch>
           <Route path="/form">
@@ -42,9 +41,7 @@ function App() {
           <Route path="/help">
             <Help />
           </Route>
-          <Route path="/loading">
-            <LoadingScreen />
-          </Route>
+          <Route path="/loading" component={LoadingScreen}/>
           <Route path="/faqpage">
             <FAQPage />
           </Route>
@@ -55,9 +52,7 @@ function App() {
             <Home />
           </Route>
         </Switch>
-        <Footer/>
-      </Router>
-      
+        <Footer/> 
     </div>
   );
 }

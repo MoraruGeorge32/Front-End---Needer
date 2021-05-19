@@ -1,17 +1,30 @@
 .alignRight{
+    display:flex;
     justify-content: center;
 }
 
+
+
 .butonSubmit{
+    display:flex;
+    justify-content:center;
     background-color:rgba(252,81,133, 1);
     color: white;
-    font-size: 2vw;
-    text-align: right;
+    font-size: 2.5vw;
+    font-style: Roboto;
+    cursor: pointer;
     margin: 4vw 1vw 2vw;
     border-style: solid;
     border-color:white;
     border-width: 0.5vw;
     border-radius: 1vw;
+    width: 20%;
+}
+
+.buttonSubmit a, a:hover, a:active, a:focus {
+    color:inherit;
+    text-decoration: none !important;
+    cursor: pointer;
 }
 
 .Cantitate_produs{
@@ -125,7 +138,33 @@
     
 }
 
+#loader {
+    display: none;
+    width: 2vw;
+    height: 2vw;
+    margin: 0 0 0 0;
+    border-top: 1vw solid #364f6b;
+    border-right: 1vw solid #3fc1c9;
+    border-bottom: 1vw solid #f5f5f5;
+    border-left: 1vw solid black;
+    border-radius: 50%;
+    border-top: 1vw solid #3498db;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
 @media screen and (max-width:600px) {
+
+    #loader{
+        width: 3vh;
+        height: 3vh;
+        border-top: 2vh solid #364f6b;
+        border-right: 2vh solid #3fc1c9;
+        border-bottom: 2vh solid #f5f5f5;
+        border-left: 2vh solid black;
+        border-radius: 50%;
+        border-top: 2vh solid #3498db;
+    }
 
     .DescriereData{
         font-size: 2vh;
@@ -169,6 +208,7 @@
     }
 
     .butonSubmit{
+        width: 20vh;
         font-size: 4vh;
         text-align: right;
         margin: 4vh 1vh 2vh;

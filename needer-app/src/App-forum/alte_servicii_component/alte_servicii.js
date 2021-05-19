@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { unmountComponentAtNode, findDOMNode, render } from 'react-dom';
 import './style.css';
 import Tags from "./tags";
 import { Link } from 'react-router-dom';
@@ -17,18 +16,23 @@ import CantitateInput from "./cantitateInput";
 
 
 function AlteServicii() {
-
+    const [loading,setLoading] = useState(false);
     const [tags, setTags] = useState([]);
-    var [cantitate, setCantitate] = useState([]);
+    const [cantitate, setCantitate] = useState([]);
+    const [helper,setHelper] = useState([]);
     let count = 0;
+    const API_URL="https://reqres.in/api/users/2"
+    localStorage.setItem('user', "bla")
+
     const formik = useFormik({
         initialValues: {
+            //username: '',
             tip_nevoie: '',
             tags: [],
             textbox: '',
         },
         onSubmit: values => {
-
+            document.getElementById("loader").style.display="inline";
             let tagValues = tags;
             tagValues.map((tag, index) => {
                 tag.name = tag.text;
@@ -36,29 +40,35 @@ function AlteServicii() {
                 delete tag["text"];
                 return tag;
             })
-            alert(JSON.stringify(tagValues));
             if (formik.values.tip_nevoie === "Produs")
                 tagValues.map((tag, index) => tag["quantity"] = cantitate[index])
             else
                 tagValues.map((tag) => tag["quantity"] = -1)
+            //formik.values.username=localStorage.getItem('user');
             values.tags = tagValues;
-            alert(JSON.stringify(values));
-            fetch(`https://hooks.zapier.com/hooks/catch/10117216/byp97u8`, {
-                method: 'POST',
-                body: JSON.stringify(values),
-            });
+            sendItemsToDB();
             console.log(JSON.stringify(values));
         },
     });
 
+    const sendItemsToDB = () => {
+        fetch("https://reqres.in/api/users/2")
+        .then(res=> {
+            res=res.json();
+            seteazaHelper(res);
+        })
+    }
+
+
+    const seteazaHelper= (help) => {
+        setHelper(help)
+    }
     const formikNevoie = () => {
         let selectedRadio = "";
-        if (document.getElementById("selectServiciu").checked)
-        { 
-             selectedRadio = "Serviciu";
+        if (document.getElementById("selectServiciu").checked) {
+            selectedRadio = "Serviciu";
         }
-        else 
-        {
+        else {
             selectedRadio = "Produs";
         }
         if (formik.values.tip_nevoie !== selectedRadio)
@@ -66,12 +76,20 @@ function AlteServicii() {
         formik.values.tip_nevoie = selectedRadio;
     }
 
+    const seteazaLoading = () => {
+        if(loading===false)
+            setLoading(true);
+        else
+            setLoading(false);
+    }
+
     const seteazaTag = (tag) => {
         setTags(tag)
-    }   
-
-    return (<div className="wrapper" id="test">
-        <div className="wrapper_form">
+    }
+    return (
+        
+        <div className="wrapper" id="test">
+        {!loading ? (<div className="wrapper_form">
             <form onSubmit={formik.handleSubmit}>
                 <div className="DescriereNevoie"><label>Descriere nevoie</label> </div> <br />
 
@@ -94,13 +112,15 @@ function AlteServicii() {
                 }
 
                 <div className="alignRight">
-                    <Link to='/loading'>
-                        <input className="butonSubmit" onClick={formik.handleSubmit} type="submit"></input>
-                    </Link>
+                    <div className="butonSubmit" onClick={formik.handleSubmit} type="submit">
+                        Trimite
+                        <div id="loader"></div>
+                    </div>
                 </div>
 
             </form>
-        </div>
+        </div>) : null }
+        
     </div>
     );
 }

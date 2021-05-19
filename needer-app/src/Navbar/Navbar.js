@@ -4,9 +4,7 @@ import Hamburger from '../hamburger/Hamburger';
 function Navbar() {
     return (
         <div className="Navbar">
-            <div class="firstSide"> 
-                  
-            </div>
+            <div class="firstSide"></div>
             <div className="secondSide">
                <Hamburger/>
             </div>
