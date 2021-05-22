@@ -4,35 +4,75 @@ import Tags from "./tags";
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import CantitateInput from "./cantitateInput";
-
-// function hideCantitate() {
-//     document.getElementById("cantitateprodus").style.display = "none";
-// }
-
-// function showCantitate() {
-//     document.getElementById("cantitateprodus").style.display = "inline-block";
-// }
-
-
+import ControlledCarousel from '../../carousel/carousel.js';
 
 function AlteServicii() {
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [tags, setTags] = useState([]);
     const [cantitate, setCantitate] = useState([]);
-    const [helper,setHelper] = useState([]);
+    const [helper, setHelper] = useState([]);
     let count = 0;
-    const API_URL="https://reqres.in/api/users/2"
-    localStorage.setItem('user', "bla")
+    const API_URL = "https://reqres.in/api/users/2"
+
+
+    const sendItemsToDB = (values) => {
+        //ar cam trebui un body pt json gen ca un body request
+        fetch("https://reqres.in/api/users/2", {
+            method: "POST",
+            body: JSON.stringify(values),
+            headers: { "Content-type": "application/json; charset=UTF-8" }
+        })
+            .then(res => {
+                res = res.json();
+                seteazaHelper(res);
+            }).then(json => {
+                console.log(json)
+            })
+
+    }
+    function status(response) {
+        if (response.status >= 200 && response.status < 300) {
+            // cererea poate fi rezolvată – fulfill
+            return Promise.resolve(response)
+        } else {
+            // cererea a fost refuzată – reject
+            return Promise.reject(new Error(response.statusText))
+        }
+    }
+    const receiveTop = () => {
+        fetch('https://www.random.org/sequences/?min=1&max=33&col=1&format=plain')
+            .then(status)
+            .then(response => response.text())
+            .then(response => {
+                alert(response);
+                let helpersList = [];
+                /*json.forEach(user => {
+                    //cred ca mai bine setez aici
+                    console.log(user)
+                    helpersList = [...helpersList, user];
+                })*/
+                //seteazaHelper(helpersList)//nu cred ca mai are rost chestia asta
+                //gen setarea starii cu noii helperi in componenta aia cu top
+                console.log(response);
+                seteazaLoading();
+            })
+            .catch(error => {
+                alert("nasol coe");
+            })
+    };
+
+
 
     const formik = useFormik({
         initialValues: {
             //username: '',
-            tip_nevoie: '',
-            tags: [],
-            textbox: '',
+            tip_nevoie: 'Serviciu',
+            tags: {},
+            details: '',
         },
         onSubmit: values => {
-            document.getElementById("loader").style.display="inline";
+            document.getElementById("loader1").style.display = "inline";
+            //values.username=local.Storage("username");
             let tagValues = tags;
             tagValues.map((tag, index) => {
                 tag.name = tag.text;
@@ -44,23 +84,14 @@ function AlteServicii() {
                 tagValues.map((tag, index) => tag["quantity"] = cantitate[index])
             else
                 tagValues.map((tag) => tag["quantity"] = -1)
-            //formik.values.username=localStorage.getItem('user');
-            values.tags = tagValues;
-            sendItemsToDB();
-            console.log(JSON.stringify(values));
-        },
+            delete values["tip_nevoie"];
+            tagValues.map((tag) => values.tags[tag.name] = tag.quantity)
+            alert(JSON.stringify(values))
+            //sendItemsToDB(values);
+            receiveTop();
+        }
     });
-
-    const sendItemsToDB = () => {
-        fetch("https://reqres.in/api/users/2")
-        .then(res=> {
-            res=res.json();
-            seteazaHelper(res);
-        })
-    }
-
-
-    const seteazaHelper= (help) => {
+    const seteazaHelper = (help) => {
         setHelper(help)
     }
     const formikNevoie = () => {
@@ -77,201 +108,52 @@ function AlteServicii() {
     }
 
     const seteazaLoading = () => {
-        if(loading===false)
+        if (loading === false)
             setLoading(true);
         else
             setLoading(false);
     }
 
     const seteazaTag = (tag) => {
-        setTags(tag)
+        setTags(tag);
     }
     return (
-        
+
         <div className="wrapper" id="test">
-        {!loading ? (<div className="wrapper_form">
-            <form onSubmit={formik.handleSubmit}>
-                <div className="DescriereNevoie"><label>Descriere nevoie</label> </div> <br />
+            {!loading ? (<div className="wrapper_form">
+                <form onSubmit={formik.handleSubmit}>
+                    <div className="DescriereNevoie"><label>Descriere nevoie</label> </div> <br />
 
-                <label htmlFor="tip_nevoie">Alegeți tipul de nevoie</label><br />
-                <input defaultChecked onChange={formikNevoie} type="radio" id="selectServiciu" name="tip_nevoie" value="Serviciu" required /> Serviciu <br />
-                <input onChange={formikNevoie} type="radio" id="selectProdus" name="tip_nevoie" value="Produs" required /> Produs
+                    <label htmlFor="tip_nevoie">Alegeți tipul de nevoie</label><br />
+                    <input defaultChecked onChange={formikNevoie} type="radio" id="selectServiciu" name="tip_nevoie" value="Servicii" required /> Servicii <br />
+                    <input onChange={formikNevoie} type="radio" id="selectProdus" name="tip_nevoie" value="Produse" required /> Produse
                 <br />
-                <div id="listaTags">
-                    <Tags giveTags={seteazaTag} tags={tags} check={formik.values.tip_nevoie} />
-                </div>
-                <textarea id="descriere_text_box" name="textbox" onChange={formik.handleChange} />
-                <br />
-                <div className="DescriereData"><span className="DataFinalizare">Data doririi finalizării cererii</span></div>
-                <br />
-                {
-                    (formik.values.tip_nevoie === "Produs") ?
-                        tags.map((tag) =>
-                            <CantitateInput quantity={cantitate} giveQuantity={setCantitate} tag={tag} keys={++count} />) : undefined
-
-                }
-
-                <div className="alignRight">
-                    <div className="butonSubmit" onClick={formik.handleSubmit} type="submit">
-                        Trimite
-                        <div id="loader"></div>
+                    <div id="listaTags">
+                        <Tags giveTags={seteazaTag} tags={tags} check={formik.values.tip_nevoie} />
                     </div>
-                </div>
+                    <textarea id="descriere_text_box" name="details" onChange={formik.handleChange} />
+                    <br />
+                    {
+                        (formik.values.tip_nevoie === "Produs") ?
+                            tags.map((tag) =>
+                                <CantitateInput quantity={cantitate} giveQuantity={setCantitate} tag={tag} keys={++count} />) : undefined
+                    }
+                    <div className="alignRight">
+                        <div className="butonSubmit" onClick={formik.handleSubmit} type="submit">
+                            Trimite
+                            <div id="loader1" class="spinner-border text-danger" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
 
-            </form>
-        </div>) : null }
-        
-    </div>
+                </form>
+            </div>) : <ControlledCarousel/>/*
+            aici tre cred sa bagam componenta la care o facut Tudor in care sa dam la props acei helperi cred : ai dreptate robi
+            */}
+
+        </div>
     );
 }
 
 export default AlteServicii;
-
-
-
-/*
-className ClasaAlteServicii extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            tip_serviciu: '',
-            tags: [],
-            textarea: '',
-            cantitate: 0,
-        };
-        this.handleChangeType = this.handleChangeType.bind(this);
-        this.handleChangeTextArea = this.handleChangeTextArea.bind(this);
-        this.handleChangeCantitate = this.handleSubmit.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleTags = this.handleTags.bind(this);
-        this.callBackDate = this.callBackDate.bind(this);
-        this.showCantitate = this.showCantitate.bind(this);
-        this.hideCantitate = this.hideCantitate.bind(this);
-    }
-
-    handleTags = (dataTags) => {
-        this.setState({ tags: dataTags });
-        console.log(this.state);
-    }
-
-    handleInputChange(event) {
-        var target = event.target;
-        if (target.type === 'radio') {
-            this.setState({ tip_serviciu: event.target.value });
-        }
-        if (target.type === 'number') {
-            this.setState({ cantitate: event.target.value });
-        }
-    }
-
-    handleChangeCantitate(event) {
-        this.setState({ cantitate: event.target.value });
-    }
-
-    handleChangeTextArea(event) {
-        this.setState({ textarea: event.target.value });
-    }
-
-    handleChangeType(event) {
-        this.setState({ tip_serviciu: event.target.value });
-    }
-
-    hideCantitate() {
-        document.getElementById("cantitateprodus").style.display = "none";
-        this.setState({
-            tip_serviciu: 'Serviciu'
-        });
-    }
-    showCantitate() {
-        document.getElementById("cantitateprodus").style.display = "inline-block";
-        this.setState({
-            tip_serviciu: 'Produs'
-        });
-    }
-    componentDidMount() {
-        document.getElementById("selectServiciu").addEventListener('onClick', this.hideCantitate);
-        document.getElementById("selectProdus").addEventListener('onClick', this.showCantitate);
-        document.getElementById('cantitateprodus').style.display = "none";
-    }
-
-
-    handleSubmit(event) {
-        console.log(this.state.tags);
-        event.preventDefault();
-        fetch(`https://hooks.zapier.com/hooks/catch/10117216/byqhx9d/silent/`, {
-            method: 'POST',
-            //body: JSON.stringify({ email, comment }),
-        });
-    }
-    callBackDate(data_copil) {
-        this.setState({
-            data_finalizare: data_copil
-        });
-        console.log(this.state);
-    }
-    render() {
-        return (
-            <div className="wrapper" id="test">
-                <div className="wrapper_form">
-                    <form onSubmit={this.handleSubmit}>
-                        
-                        <div className="DescriereNevoie"><label>Descriere nevoie</label> </div> <br />
-
-                        <label htmlFor="tip_nevoie">Alegeți tipul de nevoie</label><br />
-                        <input type="radio" id="selectServiciu" onClick={this.hideCantitate} name="tip_nevoie" value="Serviciu" required /> Serviciu <br />
-                        <input type="radio" id="selectProdus" onClick={this.showCantitate} name="tip_nevoie" value="Produs" checked required /> Produs
-                            <br />
-                        <Tags parentCallback={this.handleTags} />
-                        <textarea id="descriere_text_box" name="textbox" onChange={this.handleChangeTextArea} />
-                        <br />
-                        
-                        <div className="DescriereData"><span className="DataFinalizare">Data doririi finalizării cererii</span></div>
-                        <br />
-                        
-                        <div className="Cantitate_produs" id="cantitateprodus">
-                            <div className="Cantitate_produs_1">
-                                <label for="quantity">Cantitate (intre 1 si 100 de kilograme):</label>
-                            </div>
-                            <input type="number" id="quantity" name="quantity" min="1" max="100" />
-                            <br />
-                        </div>
-                        <div className="alignRight">
-                            <Link to='/loading'>
-                                <input className="butonSubmit" type="submit"></input>
-                            </Link>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        );
-    };
-}
-*/
-//de avut in calcul functie asyncrona cand vrem raspuns de la catalin
-function User(props) {
-    const [user, setUser] = useState(null);
-
-    async function fetchUserData(id) {
-        const response = await fetch("/" + id);
-        setUser(await response.json());
-    }
-    /*
-      useEffect(() => {
-        fetchUserData(props.id);
-      }, [props.id]);*/
-
-    if (!user) {
-        return "loading...";
-    }
-
-    return (
-        <details>
-            <summary>{user.name}</summary>
-            <strong>{user.age}</strong> years old
-            <br />
-        lives in {user.address}
-        </details>
-    );
-}

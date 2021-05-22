@@ -138,33 +138,11 @@
     
 }
 
-#loader {
-    display: none;
-    width: 2vw;
-    height: 2vw;
-    margin: 0 0 0 0;
-    border-top: 1vw solid #364f6b;
-    border-right: 1vw solid #3fc1c9;
-    border-bottom: 1vw solid #f5f5f5;
-    border-left: 1vw solid black;
-    border-radius: 50%;
-    border-top: 1vw solid #3498db;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-  }
+#loader1{
+    display:none;
+}
 
-@media screen and (max-width:600px) {
-
-    #loader{
-        width: 3vh;
-        height: 3vh;
-        border-top: 2vh solid #364f6b;
-        border-right: 2vh solid #3fc1c9;
-        border-bottom: 2vh solid #f5f5f5;
-        border-left: 2vh solid black;
-        border-radius: 50%;
-        border-top: 2vh solid #3498db;
-    }
+@media screen and (max-width:600px){
 
     .DescriereData{
         font-size: 2vh;

@@ -43,7 +43,7 @@ function Footer() {
 						<ColoredLine color="#fc5183" class="hrDown" />
 					</div>
 					<article>
-						<span>Scrieți-ne:</span>
+						<span>Scrieți-ne: </span>
 						<span>
 							<a href="mailto:proiectIP@info.uaic.ro">
 								proiectIP@info.uaic.ro
